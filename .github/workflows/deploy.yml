@@ -23,3 +23,5 @@ jobs:
       - name: Deploy to Railway
         run: |
           railway up --detach --service nest-api
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_PROJECT_TOKEN }}
