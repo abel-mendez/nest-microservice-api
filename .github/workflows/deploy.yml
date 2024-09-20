@@ -1,31 +1,25 @@
 name: Deploy to Railway
 
 on:
-  workflow_dispatch:  # Esto permite ejecutar el workflow de forma manual
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Paso 1: Chequear el código del repositorio
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Paso 2: Instalar Railway CLI
       - name: Install Railway CLI
         run: |
           curl -fsSL https://railway.app/install.sh | sh
 
-      # Paso 3: Configurar el token del proyecto
       - name: Configure Railway Project Token
         run: |
           mkdir -p ~/.railway
-          echo $RAILWAY_PROJECT_TOKEN > ~/.railway/token
+          echo "${{ secrets.RAILWAY_PROJECT_TOKEN }}" > ~/.railway/token
 
-      # Paso 4: Desplegar la aplicación en Railway
       - name: Deploy to Railway
         run: |
           railway up --detach --service nest-api
-        env:
-          RAILWAY_PROJECT_TOKEN: ${{ secrets.RAILWAY_PROJECT_TOKEN }}
