@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # Servicio de la aplicación Nest.js
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URI: mongodb://mongo:27017/api
+      ##you can replace this with your own secret key
+      JWT_SECRET: apiSecretKey
+    volumes:
+      - .:/app
+    command: npm run start:dev
+
+  # Servicio de MongoDB
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
