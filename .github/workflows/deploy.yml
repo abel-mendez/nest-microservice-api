@@ -28,4 +28,4 @@ jobs:
         run: |
           railway up --detach --service nest-api
         env:
-          RAILWAY_PROJECT_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_PROJECT_TOKEN: ${{ secrets.RAILWAY_PROJECT_TOKEN }}
