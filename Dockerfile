@@ -7,6 +7,7 @@ WORKDIR /app
 # Copia los archivos de tu proyecto a la imagen
 COPY package*.json ./
 RUN npm install
+RUN npm run build
 
 # Copia el resto del proyecto
 COPY . .
