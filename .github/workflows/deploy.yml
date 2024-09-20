@@ -17,14 +17,15 @@ jobs:
         run: |
           curl -fsSL https://railway.app/install.sh | sh
 
-      # Paso 3: Crear archivo de configuración con el token
-      - name: Configure Railway Token
+      # Paso 3: Configurar el token del proyecto
+      - name: Configure Railway Project Token
         run: |
           mkdir -p ~/.railway
-          echo $RAILWAY_TOKEN > ~/.railway/token
+          echo $RAILWAY_PROJECT_TOKEN > ~/.railway/token
 
       # Paso 4: Desplegar la aplicación en Railway
       - name: Deploy to Railway
-        run: railway up --detach
+        run: |
+          railway up --detach --service nest-api
         env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_PROJECT_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
