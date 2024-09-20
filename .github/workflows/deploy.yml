@@ -17,13 +17,14 @@ jobs:
         run: |
           curl -fsSL https://railway.app/install.sh | sh
 
-      # Paso 3: Configurar Railway con el token
-      - name: Railway Login
+      # Paso 3: Crear archivo de configuración con el token
+      - name: Configure Railway Token
         run: |
-          echo $RAILWAY_TOKEN | railway login
+          mkdir -p ~/.railway
+          echo $RAILWAY_TOKEN > ~/.railway/token
 
       # Paso 4: Desplegar la aplicación en Railway
       - name: Deploy to Railway
         run: railway up --detach
         env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}  # Usa el token como variable de entorno
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
