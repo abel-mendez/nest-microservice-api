@@ -22,7 +22,7 @@ jobs:
 
       - name: Deploy to Railway
         run: |
-          railway up --detach
+          railway up --detach --service c9b3ad5b-1e29-499e-809f-893cfd5cdcbb
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_PROJECT_TOKEN }}
           RAILWAY_PROJECT_TOKEN: ${{ secrets.RAILWAY_PROJECT_TOKEN }}
